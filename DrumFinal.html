@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mogra&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body
+{
+background: url("7009265-biola-image-wallpaper.jpg");
+}
+#display {
+margin: auto;
+width: 600px;
+  display: flex;
+  flex-direction: row; /* Reverse the order of buttons */
+  justify-content: flex-start; /* Align buttons to the left */
+  align-items: flex-end; /* Align buttons to the bottom */
+  gap: 10px; /* Add some spacing between buttons */
+}
+
+.drum-pad {
+ border-color:black;
+  background-color: lightblue;
+  width: 150px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; /* Center content horizontally */
+  padding: 10px; /* Add some padding to the buttons */
+}
+
+.drum-pad:hover {
+
+  background: linear-gradient(to right, black, gold);
+}
+.b-one{
+height:200px;
+}
+.b-two{
+height:190px;
+}
+.b-three{
+height:180px;
+}
+.b-four{
+height:180px;
+}
+.b-five{
+height:180px;
+}
+.b-six{
+height:180px;
+}
+.b-seven{
+height:180px;
+}
+.b-eight{
+height:190px;
+}
+.b-nine{
+height:200px;
+}
+
+h1{
+color: cyan;
+font-family: 'Mogra', cursive;
+font-family: 'Pacifico', cursive;
+}
+footer{
+text-align:center;
+color: magenta;
+font-family: 'Mogra', cursive;
+font-family: 'Pacifico', cursive;
+}
+#message
+{
+font-family:forte;
+font-size: 30px;
+color: gold;
+text-align:center;
+}
+
+
+</style>
+
+
+</head>
+<body>
+<h1 style="text-align:center">Innocent Lunika's Drum Machine </h1>
+<div id="drum-machine">
+<div id="display">
+<button class="drum-pad b-one" id="Qb">Q<audio id="Q"><source src="Sound Effects\Q.mp3" type="audio/mp3"></audio></button>
+<button class="drum-pad b-two" id="Wb">W<audio id="W"><source src="Sound Effects\W.mp3" type="audio/mp3"></audio></button>
+<button class="drum-pad b-three" id="Eb">E<audio id="E"><source src="Sound Effects\E.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-four" id="Ab">A<audio id="A"><source src="Sound Effects\A.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-five" id="Sb">S<audio id="S"><source src="Sound Effects\S.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-six" id="Db">D<audio id="D"><source src="Sound Effects\D.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-seven" id="Zb">Z<audio id="Z"><source src="Sound Effects\Z.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-eight" id="Xb">X<audio id="X"><source src="Sound Effects\X.MP3" type="audio/MP3"></audio></button>
+<button class="drum-pad b-nine" id="Cb">C<audio id="C"><source src="Sound Effects\C.MP3" type="audio/MP3"></audio></button>
+
+</div>
+<p id="message"><p>
+</div>
+<footer>Created By Z.I Lunika (Using JQuery,Javascript, CSS-FlexBox)</footer>
+</body>
+<script src="JqueryLibb.js"></script>
+<script>
+//implement some JQUERY action!
+$(document).ready(function(){
+$(".drum-pad").click(function (){
+
+
+$(this).fadeOut(100).fadeIn(100);
+//Try to expand and button when pressed!
+//$(this).animate({width:"+=2px"},150).animate({width:"-=2px"},150);
+//$(this).css("background-color", "linear-gradient(to right, black, gold)");
+playSound($(this).attr("id"))
+})
+
+});
+</script>
+<script>
+var DisplayMessage = document.getElementById("message");
+var messageResponse = [["Q","Q"],["W","W"], ["E","E"],["A","A"],["S","S"] ,["D","D"],["Z","Z"],["X","X"], ["C","C"]]
+var current="";
+//this for key pressed events
+document.addEventListener("keydown",e=>{
+if(e.repeat)
+{
+return
+}
+var keyPressed = e.key;
+//alert(keyPressed.toUpperCase());
+//alert(typeof keyPressed);
+var A= document.getElementById(keyPressed.toUpperCase());
+if(current!="")
+{
+current.pause();
+}
+//alert("hello"+AllATags);
+
+if(A !=null)
+{
+current=A;
+//$this.css("background-color", "linear-gradient(to right, black, gold)");
+}
+A.currentTime=0;
+A.play();
+A.style.backgroundColor = "red";
+displayMess(keyPressed)
+});
+
+
+function playSound(id) //this is for click events
+{
+var  IdString= id[0]; //get the clicked tag
+//alert(IdString)
+var getAudioNote = document.getElementById(IdString);
+if(current!="")
+{
+current.pause();
+}
+//alert("hello"+AllATags);
+if(getAudioNote !=null)
+{
+current=getAudioNote;
+}
+getAudioNote.currentTime=0;
+getAudioNote.play();
+displayMess(IdString);
+}
+function displayMess(keyVal)
+{
+for(var i=0;i<messageResponse.length;i++)
+{
+	if(messageResponse[i][0]==keyVal.toUpperCase())
+		{
+		DisplayMessage.innerHTML=messageResponse[i][1];
+                
+		}
+}
+}
+</script>
+</html>
